@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: container-info-green
+  labels:
+    app: container-info
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: container-info
+  template:
+    metadata:
+      labels:
+        app: container-info
+        version: "green"
+    spec:
+      containers:
+      - name: container-info
+        image: gluobe/container-info:green
+        ports:
+        - containerPort: 80
