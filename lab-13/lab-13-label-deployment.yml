@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: container-info-blue
+  labels:
+    app: container-info
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: container-info
+  template:
+    metadata:
+      labels:
+        app: container-info
+        version: "blue"
+    spec:
+      containers:
+      - name: container-info
+        image: gluobe/container-info:blue
+        ports:
+        - containerPort: 80
+      nodeSelector:
+        environment: test
