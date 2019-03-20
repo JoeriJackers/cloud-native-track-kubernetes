@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: meme-persistent
+  labels:
+    app: meme-persistent
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: meme-persistent
+  template:
+    metadata:
+      labels:
+        app: meme-persistent
+    spec:
+      volumes:
+      - name: lab-09-volume
+        persistentVolumeClaim:
+          claimName: lab-09-claim
+      containers:
+      - name: meme-persistent
+        image: gluobe/meme-persistent:v1
+        ports:
+        - containerPort: 80
+        volumeMounts:
+          - mountPath: "/var/www/html/images"
+            name: lab-09-volume
